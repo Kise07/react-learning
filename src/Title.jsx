@@ -1,10 +1,16 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 
 export default function Title() {
     
-    const [title, updateTitle] = useState('my title');
+    const [title] = useState('my title');
     const [inputVal, updateInput] = useState('');
     const [list, updateList] = useState([]);
+    
+    useEffect(
+        () => {
+            console.log('effect run')
+        }, [list, inputVal]
+    )
 
     return (
         <div>
@@ -13,7 +19,6 @@ export default function Title() {
             <button onClick={() => {
                 updateList([...list, inputVal]);
                 updateInput('');
-                updateTitle(list); // It adds all the string from list together
                 }}>Click me</button>
             {
                 list.map((item, i) => <div key={i}>{item}</div>)
